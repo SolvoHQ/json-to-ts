@@ -1,0 +1,45 @@
+{
+  "name": "@solvohq/json-to-ts",
+  "version": "0.1.0",
+  "description": "JSON to TypeScript / Zod / Valibot — CLI mirror of json-to-ts-app.netlify.app. Pipe JSON in, get types or schemas out.",
+  "keywords": [
+    "json",
+    "typescript",
+    "zod",
+    "valibot",
+    "schema",
+    "codegen",
+    "type-generation",
+    "json-to-typescript",
+    "json-to-zod",
+    "json-to-valibot",
+    "cli"
+  ],
+  "homepage": "https://json-to-ts-app.netlify.app/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SolvoHQ/json-to-ts.git",
+    "directory": "cli"
+  },
+  "bugs": {
+    "url": "https://github.com/SolvoHQ/json-to-ts/issues"
+  },
+  "license": "MIT",
+  "author": "SolvoHQ",
+  "main": "index.js",
+  "bin": {
+    "json-to-ts": "bin.js"
+  },
+  "files": [
+    "index.js",
+    "bin.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
