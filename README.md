@@ -7,6 +7,7 @@ Paste JSON, get **TypeScript interfaces, Zod schemas, or Valibot schemas** insta
 [![Outputs](https://img.shields.io/badge/outputs-TS%20%2B%20Zod%20%2B%20Valibot-purple.svg)](https://json-to-ts-app.netlify.app/)
 [![Landing pages](https://img.shields.io/badge/landing%20pages-56-orange.svg)](#long-tail-landing-pages)
 [![HTTP API](https://img.shields.io/badge/HTTP%20API-/api/convert-78dce8.svg)](https://json-to-ts-app.netlify.app/api/)
+[![VS Code extension](https://img.shields.io/badge/VS%20Code-extension-007ACC.svg)](https://github.com/SolvoHQ/json-to-ts/releases/tag/vscode-v0.1.0)
 
 ## Try it now
 
@@ -130,6 +131,19 @@ Want this to run inside a CI workflow and commit the regenerated types back into
 
 Source + full inputs reference: **[github.com/SolvoHQ/json-to-ts-action](https://github.com/SolvoHQ/json-to-ts-action)**.
 
+## VS Code extension
+
+Convert JSON in your editor selection or clipboard into TypeScript / Zod / Valibot without leaving the editor. Two commands, one quick-pick, result opens in a new untitled doc.
+
+```bash
+# Download the .vsix from the latest vscode-v* release, then:
+code --install-extension json-to-ts-0.1.0.vsix
+```
+
+Get the latest `.vsix`: **[github.com/SolvoHQ/json-to-ts/releases/tag/vscode-v0.1.0](https://github.com/SolvoHQ/json-to-ts/releases/tag/vscode-v0.1.0)**
+
+Source + full docs: **[`vscode/`](vscode/)**.
+
 ## Local development
 
 There's no build step and no backend. Open the file:
@@ -154,6 +168,8 @@ code/                                Live site root (deployed to Netlify)
   <slug>/index.html                  Long-tail landing pages
 cli/
   index.js, bin.js                   @solvohq/json-to-ts npm CLI source
+vscode/
+  extension.js, package.json         VS Code extension — calls /api/convert
 tools/
   build_landing.py                   Generator for landing pages
   build_og_image.py                  Generator for og-image.png from og-image.svg

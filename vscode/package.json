@@ -1,0 +1,65 @@
+{
+  "name": "json-to-ts",
+  "displayName": "JSON to TypeScript / Zod / Valibot",
+  "description": "Convert JSON to TypeScript interfaces, Zod schemas, or Valibot schemas — from your editor selection or clipboard. Wraps the public json-to-ts-app.netlify.app API.",
+  "version": "0.1.0",
+  "publisher": "solvohq",
+  "license": "MIT",
+  "homepage": "https://json-to-ts-app.netlify.app/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SolvoHQ/json-to-ts.git",
+    "directory": "vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/SolvoHQ/json-to-ts/issues"
+  },
+  "categories": ["Programming Languages", "Snippets", "Other"],
+  "keywords": [
+    "json",
+    "typescript",
+    "zod",
+    "valibot",
+    "schema",
+    "codegen",
+    "json-to-typescript",
+    "json-to-zod"
+  ],
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onCommand:json-to-ts.convertSelection",
+    "onCommand:json-to-ts.convertClipboard"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "json-to-ts.convertSelection",
+        "title": "JSON to TS: Convert Selection (or Document)",
+        "category": "JSON to TS"
+      },
+      {
+        "command": "json-to-ts.convertClipboard",
+        "title": "JSON to TS: Convert Clipboard",
+        "category": "JSON to TS"
+      }
+    ],
+    "configuration": {
+      "title": "JSON to TS",
+      "properties": {
+        "jsonToTs.apiUrl": {
+          "type": "string",
+          "default": "https://json-to-ts-app.netlify.app/api/convert",
+          "description": "Endpoint for the JSON-to-TS conversion API. Override only if you self-host."
+        },
+        "jsonToTs.rootName": {
+          "type": "string",
+          "default": "Root",
+          "description": "Name of the generated root interface / type / schema."
+        }
+      }
+    }
+  }
+}
