@@ -5,7 +5,8 @@ Paste JSON, get **TypeScript interfaces, Zod schemas, or Valibot schemas** insta
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Live demo](https://img.shields.io/badge/demo-live-brightgreen.svg)](https://json-to-ts-app.netlify.app/)
 [![Outputs](https://img.shields.io/badge/outputs-TS%20%2B%20Zod%20%2B%20Valibot-purple.svg)](https://json-to-ts-app.netlify.app/)
-[![Landing pages](https://img.shields.io/badge/landing%20pages-49-orange.svg)](#long-tail-landing-pages)
+[![Landing pages](https://img.shields.io/badge/landing%20pages-56-orange.svg)](#long-tail-landing-pages)
+[![HTTP API](https://img.shields.io/badge/HTTP%20API-/api/convert-78dce8.svg)](https://json-to-ts-app.netlify.app/api/)
 
 ## Try it now
 
@@ -99,7 +100,35 @@ Dedicated pages for the JSON shapes developers actually paste — Stripe webhook
 
 **Compared with other tools** — [vs quicktype](https://json-to-ts-app.netlify.app/json-to-ts-vs-quicktype/) · [vs transform.tools](https://json-to-ts-app.netlify.app/json-to-ts-vs-transform-tools/) · [vs json2ts](https://json-to-ts-app.netlify.app/json-to-ts-vs-json2ts/) · [vs json-to-typescript CLI](https://json-to-ts-app.netlify.app/json-to-ts-vs-json-to-typescript-cli/)
 
-15 named shapes × 3 validators + 4 head-to-head comparisons = 49 landing pages, all generator-driven from a single dict in `tools/build_landing.py`.
+15 named shapes × 3 validators + 4 head-to-head comparisons + 6 framework × validator pages + 1 HTTP API docs page = 56 landing pages, all generator-driven from a single dict in `tools/build_landing.py`.
+
+## HTTP API
+
+Same algorithm exposed at a public HTTP endpoint — for shell scripts, CI jobs, Postman collections, or any HTTP-native caller. Free, no signup, no API key.
+
+```sh
+curl -X POST https://json-to-ts-app.netlify.app/api/convert \
+  -H 'Content-Type: application/json' \
+  -d '{"json":"{\"id\":42,\"email\":\"ada@example.com\"}","mode":"ts","root":"User"}'
+# → {"output":"interface User {\n  id: number;\n  email: string;\n}\n"}
+```
+
+Modes: `ts` (default — pass `"type": true` for a `type` alias instead of `interface`), `zod`, `valibot`. Full docs and three copy-pasteable curl examples at **[/api/](https://json-to-ts-app.netlify.app/api/)**.
+
+## GitHub Action
+
+Want this to run inside a CI workflow and commit the regenerated types back into your repo? Use the wrapper Action — composite (bash), no Node setup, ~1s cold start.
+
+```yaml
+- uses: SolvoHQ/json-to-ts-action@v1
+  with:
+    json: '{"id": 42, "email": "ada@example.com"}'
+    mode: ts                       # ts | zod | valibot
+    root: User
+    output-path: src/types/user.ts
+```
+
+Source + full inputs reference: **[github.com/SolvoHQ/json-to-ts-action](https://github.com/SolvoHQ/json-to-ts-action)**.
 
 ## Local development
 
@@ -120,7 +149,11 @@ code/                                Live site root (deployed to Netlify)
   index.html                         The converter (TS + Zod + Valibot)
   og-image.png                       Social preview image
   robots.txt, sitemap.xml            SEO basics
+  netlify.toml                       Functions dir + /api/convert rewrite
+  netlify/functions/convert.js       HTTP API — same algorithm as the UI
   <slug>/index.html                  Long-tail landing pages
+cli/
+  index.js, bin.js                   @solvohq/json-to-ts npm CLI source
 tools/
   build_landing.py                   Generator for landing pages
   build_og_image.py                  Generator for og-image.png from og-image.svg
